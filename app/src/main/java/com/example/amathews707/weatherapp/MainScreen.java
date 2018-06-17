@@ -1,24 +1,85 @@
 package com.example.amathews707.weatherapp;
 
+import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.widget.TextView;
+import android.util.Log;
 
-public class MainScreen extends AppCompatActivity {
-
+public class MainScreen extends AppCompatActivity implements LocationListener
+{
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
+    protected Context context;
+    TextView txtLat;
+    String lat;
+    String provider;
+    protected String latitude,longitude;
+    protected boolean gps_enabled,network_enabled;
     TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
-
     Typeface weatherFont;
 
+    /* GPS Constant Permission */
+    private static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
+    private static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 12;
+
+    /* Position */
+    private static final int MINIMUM_TIME = 10000;  // 10s
+    private static final int MINIMUM_DISTANCE = 50; // 50m
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main_screen);
+/*
+        txtLat = (TextView) findViewById(R.id.textview1); //it needs to be defined in .xml, gonna cut it later
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        //Check if location services are permitted
+        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED )
+        {
+            ActivityCompat.requestPermissions(  this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
+                    MY_PERMISSION_ACCESS_COARSE_LOCATION );
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        */
+    }
+    @Override
+    public void onLocationChanged(Location location)
+    {
+        txtLat = (TextView) findViewById(R.id.textview1);
+        txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+    }
+
+    @Override
+    public void onProviderDisabled(String provider)
+    {
+        Log.d("Latitude","disable");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider)
+    {
+        Log.d("Latitude","enable");
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras)
+    {
+        Log.d("Latitude","status");
 
 
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather-icons-master/font/weathericons-regular-webfont.ttf");
@@ -47,8 +108,6 @@ public class MainScreen extends AppCompatActivity {
             }
         });
         asyncTask.execute("25.180000", "89.530000"); //  asyncTask.execute("Latitude", "Longitude")
-
-
-
     }
 }
+
