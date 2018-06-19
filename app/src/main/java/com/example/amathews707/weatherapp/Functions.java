@@ -64,16 +64,24 @@ public class Functions {
             delegate = asyncResponse;
         }
 
+        //longitude and latitude coordinates are passed here, jsonWeathergets a weather Json with said coordinates and passes result to onPostExecute
         @Override
         protected JSONObject doInBackground(String... params) {
 
             JSONObject jsonWeather = null;
+            JSONObject fiveDay = null;
+
             try {
                 jsonWeather = getWeatherJSON(params[0], params[1]);
             } catch (Exception e) {
                 Log.d("Error", "Cannot process JSON results", e);
             }
 
+            try {
+                fiveDay = getforecastJSON(params[0], params[1]);
+            } catch (Exception e) {
+                Log.d("Error", "Cannot process JSON results", e);
+            }
 
             return jsonWeather;
         }
@@ -109,12 +117,8 @@ public class Functions {
         }
     }
 
-
-
-
-
-
-    public static JSONObject getWeatherJSON(String lat, String lon){
+    public static JSONObject getWeatherJSON(String lat, String lon)
+    {
         try {
             URL url = new URL(String.format(openWeatherURL, lat, lon));
             HttpURLConnection connection =
@@ -145,7 +149,36 @@ public class Functions {
         }
     }
 
+    public static JSONObject getforecastJSON(String lat, String lon)
+    {
+        try {
+            URL url = new URL(String.format(openWeatherURL, lat, lon));
+            HttpURLConnection connection =
+                    (HttpURLConnection)url.openConnection();
 
+            connection.addRequestProperty("x-api-key", apiKey);
 
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+
+            StringBuffer json = new StringBuffer(1024);
+            String tmp="";
+            while((tmp=reader.readLine())!=null)
+                json.append(tmp).append("\n");
+            reader.close();
+
+            JSONObject data = new JSONObject(json.toString());
+
+            // This value will be 404 if the request was not
+            // successful
+            if(data.getInt("cod") != 200){
+                return null;
+            }
+
+            return data;
+        }catch(Exception e){
+            return null;
+        }
+    }
 
 }

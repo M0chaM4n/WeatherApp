@@ -29,7 +29,7 @@
         android:id="@+id/weather_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_below = "@+id/updated_field"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -40,7 +40,7 @@
         android:id="@+id/current_temperature_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below ="@+id/pressure_field"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -73,12 +73,125 @@
         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceMedium"
         />
+    <!-- 5 day forecast, consists of 5 different textviews align to each other
+    <!- 3rd day, aka the center for the 5day alignment
     <TextView
-        android:id="@+id/textview1"
+        android:id="@+id/day3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_above="@+id/day3High"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:id="@+id/day3High"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above = "@+id/day3Low"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:id="@+id/day3Low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        />
 
+     <!- 2nd day
+
+     <TextView
+        android:id="@+id/day2Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/day2High"
+        android:layout_toLeftOf="day3Icon"
+        />
+    <TextView
+        android:id="@+id/day2High"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above = "@+id/day2Low"
+        android:layout_toLeftOf="day3High"
+        />
+    <TextView
+        android:id="@+id/day2Low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="day3Low"
+        />
+
+        <!- 4th day
+
+     <TextView
+        android:id="@+id/day4Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/day4High"
+        android:layout_toRightOf="day3Icon"
+        />
+    <TextView
+        android:id="@+id/day4High"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above = "@+id/day4Low"
+        android:layout_toRightOf="day3High"
+        />
+    <TextView
+        android:id="@+id/day4Low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="day3Low"
+        />
+
+        <!- 1st day
+
+     <TextView
+        android:id="@+id/day1Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/day1High"
+        android:layout_toLeftOf="day2Icon"
+        />
+    <TextView
+        android:id="@+id/day1High"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above = "@+id/day1Low"
+        android:layout_toLeftOf="day2High"
+        />
+    <TextView
+        android:id="@+id/day1Low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="day2Low"
+        />
+
+        <!- 5th day
+
+     <TextView
+        android:id="@+id/day5Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/day5High"
+        android:layout_toRightOf="day4Icon"
+        />
+    <TextView
+        android:id="@+id/day5High"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above = "@+id/day5Low"
+        android:layout_toRightOf="day4High"
+        />
+    <TextView
+        android:id="@+id/day5Low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="day4Low"
+        />
+    -->
 
 </RelativeLayout>

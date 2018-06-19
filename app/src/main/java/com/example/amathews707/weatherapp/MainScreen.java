@@ -17,7 +17,7 @@ import android.text.Html;
 import android.widget.TextView;
 import android.util.Log;
 
-public class MainScreen extends AppCompatActivity implements LocationListener
+public class MainScreen extends AppCompatActivity //implements LocationListener
 {
     protected LocationManager locationManager;
     protected LocationListener locationListener;
@@ -37,26 +37,7 @@ public class MainScreen extends AppCompatActivity implements LocationListener
     /* Position */
     private static final int MINIMUM_TIME = 10000;  // 10s
     private static final int MINIMUM_DISTANCE = 50; // 50m
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        setContentView(R.layout.activity_main_screen);
 /*
-        txtLat = (TextView) findViewById(R.id.textview1); //it needs to be defined in .xml, gonna cut it later
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        //Check if location services are permitted
-        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED )
-        {
-            ActivityCompat.requestPermissions(  this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
-                    MY_PERMISSION_ACCESS_COARSE_LOCATION );
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        */
-    }
     @Override
     public void onLocationChanged(Location location)
     {
@@ -79,9 +60,32 @@ public class MainScreen extends AppCompatActivity implements LocationListener
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras)
     {
-        Log.d("Latitude","status");
+        Log.d("Latitude","status"); }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_main_screen);
 
+        txtLat = (TextView) findViewById(R.id.textview1); //it needs to be defined in .xml, gonna cut it later
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        //Check if location services are permitted
+        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED )
+        {
+            ActivityCompat.requestPermissions(  this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  }, MY_PERMISSION_ACCESS_FINE_LOCATION );
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+    }
+*/
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_main_screen);
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather-icons-master/font/weathericons-regular-webfont.ttf");
 
         cityField = (TextView)findViewById(R.id.city_field);
@@ -93,6 +97,32 @@ public class MainScreen extends AppCompatActivity implements LocationListener
         weatherIcon = (TextView)findViewById(R.id.weather_icon);
         weatherIcon.setTypeface(weatherFont);
 
+        /* Textviews for 5 day forecast
+        dayOneWeatherIcon = (TextView)findViewById(R.id.day1);
+        dayOneHigh = (TextView)findViewById(R.id.day1High);
+        dayOneLow = (TextView)findViewById(R.id.day1Low);
+        dayOneWeatherIcon.setTypeface(weatherFont);
+
+        dayTwoWeatherIcon = (TextView)findViewById(R.id.day2);
+        dayTwoWeatherIcon = (TextView)findViewById(R.id.day2);
+        dayTwoWeatherIcon = (TextView)findViewById(R.id.day2);
+        dayTwoWeatherIcon.setTypeface(weatherFont);
+
+        dayThreeWeatherIcon = (TextView)findViewById(R.id.day3);
+        dayThreeHigh = (TextView)findViewById(R.id.day3High);
+        dayThreeLow = (TextView)findViewById(R.id.day3Low);
+        dayThreeWeatherIcon.setTypeface(weatherFont);
+
+        dayFourWeatherIcon = (TextView)findViewById(R.id.day4);
+        dayFourHigh = (TextView)findViewById(R.id.day4High);
+        dayFourLow = (TextView)findViewById(R.id.day4low);
+        dayFourWeatherIcon.setTypeface(weatherFont);
+
+        dayFiveWeatherIcon = (TextView)findViewById(R.id.day5);
+        dayFiveHigh = (TextView)findViewById(R.id.day5High);
+        dayFiveLow = (TextView)findViewById(R.id.day5Low);
+        dayFiveWeatherIcon.setTypeface(weatherFont);
+        */
 
         Functions.placeIdTask asyncTask =new Functions.placeIdTask(new Functions.AsyncResponse() {
             public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
@@ -105,9 +135,13 @@ public class MainScreen extends AppCompatActivity implements LocationListener
                 pressure_field.setText("Pressure: "+weather_pressure);
                 weatherIcon.setText(Html.fromHtml(weather_iconText));
 
+
+
             }
         });
-        asyncTask.execute("25.180000", "89.530000"); //  asyncTask.execute("Latitude", "Longitude")
+        asyncTask.execute("40.7831", "-73.9712"); //  asyncTask.execute("Latitude", "Longitude")
+
+        //Listener for button and loading new area, then execute asyncTask with proper givens
     }
 }
 
