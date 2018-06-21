@@ -17,6 +17,8 @@ import android.text.Html;
 import android.widget.TextView;
 import android.util.Log;
 
+import org.w3c.dom.Text;
+
 public class MainScreen extends AppCompatActivity //implements LocationListener
 {
     protected LocationManager locationManager;
@@ -27,7 +29,10 @@ public class MainScreen extends AppCompatActivity //implements LocationListener
     String provider;
     protected String latitude,longitude;
     protected boolean gps_enabled,network_enabled;
-    TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
+    TextView cityField, detailsField, currentTemperatureField, humidity_field, pressure_field,
+            weatherIcon, updatedField, dayOneWeatherIcon, dayOneHigh, dayOneLow, dayTwoWeatherIcon,
+            dayTwoHigh, dayTwoLow, dayThreeWeatherIcon, dayThreeHigh, dayThreeLow, dayFourWeatherIcon,
+            dayFourHigh, dayFourLow, dayFiveWeatherIcon, dayFiveHigh, dayFiveLow;
     Typeface weatherFont;
 
     /* GPS Constant Permission */
@@ -97,32 +102,31 @@ public class MainScreen extends AppCompatActivity //implements LocationListener
         weatherIcon = (TextView)findViewById(R.id.weather_icon);
         weatherIcon.setTypeface(weatherFont);
 
-        /* Textviews for 5 day forecast
-        dayOneWeatherIcon = (TextView)findViewById(R.id.day1);
+        dayOneWeatherIcon = (TextView)findViewById(R.id.day1Icon);
         dayOneHigh = (TextView)findViewById(R.id.day1High);
         dayOneLow = (TextView)findViewById(R.id.day1Low);
         dayOneWeatherIcon.setTypeface(weatherFont);
 
-        dayTwoWeatherIcon = (TextView)findViewById(R.id.day2);
-        dayTwoWeatherIcon = (TextView)findViewById(R.id.day2);
-        dayTwoWeatherIcon = (TextView)findViewById(R.id.day2);
+        dayTwoWeatherIcon = (TextView)findViewById(R.id.day2Icon);
+        dayTwoHigh = (TextView)findViewById(R.id.day2High);
+        dayTwoLow = (TextView)findViewById(R.id.day2Low);
         dayTwoWeatherIcon.setTypeface(weatherFont);
 
-        dayThreeWeatherIcon = (TextView)findViewById(R.id.day3);
+        dayThreeWeatherIcon = (TextView)findViewById(R.id.day3Icon);
         dayThreeHigh = (TextView)findViewById(R.id.day3High);
         dayThreeLow = (TextView)findViewById(R.id.day3Low);
         dayThreeWeatherIcon.setTypeface(weatherFont);
 
-        dayFourWeatherIcon = (TextView)findViewById(R.id.day4);
+        dayFourWeatherIcon = (TextView)findViewById(R.id.day4Icon);
         dayFourHigh = (TextView)findViewById(R.id.day4High);
-        dayFourLow = (TextView)findViewById(R.id.day4low);
+        dayFourLow = (TextView)findViewById(R.id.day4Low);
         dayFourWeatherIcon.setTypeface(weatherFont);
 
-        dayFiveWeatherIcon = (TextView)findViewById(R.id.day5);
+        dayFiveWeatherIcon = (TextView)findViewById(R.id.day5Icon);
         dayFiveHigh = (TextView)findViewById(R.id.day5High);
         dayFiveLow = (TextView)findViewById(R.id.day5Low);
         dayFiveWeatherIcon.setTypeface(weatherFont);
-        */
+
 
         Functions.placeIdTask asyncTask =new Functions.placeIdTask(new Functions.AsyncResponse() {
             public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
@@ -134,8 +138,6 @@ public class MainScreen extends AppCompatActivity //implements LocationListener
                 humidity_field.setText("Humidity: "+weather_humidity);
                 pressure_field.setText("Pressure: "+weather_pressure);
                 weatherIcon.setText(Html.fromHtml(weather_iconText));
-
-
 
             }
         });

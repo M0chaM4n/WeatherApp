@@ -74,9 +74,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         />
     <!-- 5 day forecast, consists of 5 different textviews align to each other
-    <!- 3rd day, aka the center for the 5day alignment
+         3rd day, aka the center for the 5day alignment -->
+
     <TextView
-        android:id="@+id/day3"
+        android:id="@+id/day3Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/day3High"
@@ -97,101 +98,101 @@
         android:layout_centerVertical="true"
         />
 
-     <!- 2nd day
+     <!-- 2nd day -->
 
      <TextView
         android:id="@+id/day2Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/day2High"
-        android:layout_toLeftOf="day3Icon"
+        android:layout_toLeftOf="@+id/day3Icon"
         />
     <TextView
         android:id="@+id/day2High"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above = "@+id/day2Low"
-        android:layout_toLeftOf="day3High"
+        android:layout_toLeftOf="@+id/day3High"
         />
     <TextView
         android:id="@+id/day2Low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="day3Low"
+        android:layout_toLeftOf="@+id/day3Low"
         />
 
-        <!- 4th day
+        <!-- 4th day -->
 
      <TextView
         android:id="@+id/day4Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/day4High"
-        android:layout_toRightOf="day3Icon"
+        android:layout_toRightOf="@+id/day3Icon"
         />
     <TextView
         android:id="@+id/day4High"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above = "@+id/day4Low"
-        android:layout_toRightOf="day3High"
+        android:layout_toRightOf="@+id/day3High"
         />
     <TextView
         android:id="@+id/day4Low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="day3Low"
+        android:layout_toRightOf="@+id/day3Low"
         />
 
-        <!- 1st day
+        <!-- 1st day -->
 
      <TextView
         android:id="@+id/day1Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/day1High"
-        android:layout_toLeftOf="day2Icon"
+        android:layout_toLeftOf="@+id/day2Icon"
         />
     <TextView
         android:id="@+id/day1High"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above = "@+id/day1Low"
-        android:layout_toLeftOf="day2High"
+        android:layout_toLeftOf="@+id/day2High"
         />
     <TextView
         android:id="@+id/day1Low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="day2Low"
+        android:layout_toLeftOf="@+id/day2Low"
         />
 
-        <!- 5th day
+        <!-- 5th day -->
 
      <TextView
         android:id="@+id/day5Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/day5High"
-        android:layout_toRightOf="day4Icon"
+        android:layout_toRightOf="@+id/day4Icon"
         />
     <TextView
         android:id="@+id/day5High"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above = "@+id/day5Low"
-        android:layout_toRightOf="day4High"
+        android:layout_toRightOf="@+id/day4High"
         />
     <TextView
         android:id="@+id/day5Low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="day4Low"
+        android:layout_toRightOf="@+id/day4Low"
         />
-    -->
+
 
 </RelativeLayout>
